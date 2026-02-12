@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "cmd",
+                "args": [
+                    "/C",
+                    "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Auxiliary\\Build\\vcvars64.bat\"",
+                    "&&"
+                ]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "Cmake StudioOne",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                ".."
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+        
+        },
+        {
+            "label": "Build StudioOne",
+            "type": "shell",
+            "command": "cmd.exe",
+            "args": [
+                "/C",
+                "msbuild.exe",
+                "StudioOne.slnx"
+            ],
+            "problemMatcher": ["$msCompile"],
+            "group": {
+                "kind": "build",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "dependsOn": [
+                "Cmake StudioOne"
+            ]
+        
+        }
+    ]
+}
